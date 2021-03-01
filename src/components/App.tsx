@@ -2,6 +2,7 @@ import { Provider }     from 'react-redux';
 import { store }        from '../state';
 import RepositoriesList from './RepositoriesList';
 import Home             from './Home';
+import LoginPage             from 'pages/LoginPage';
 import { AnimatedSwitch } from 'react-router-transition';
 import 'assets/styles/App.scss';
 
@@ -16,6 +17,7 @@ const App = () => {
     <Router>
       <Link to="/">Home</Link> 
       <Link to="/repos">Repos</Link>
+      <Link to="/login">Login</Link>
 
       <AnimatedSwitch
         atEnter={{ opacity: 0 }}
@@ -24,6 +26,7 @@ const App = () => {
         className="switch-wrapper"
       >
         <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={LoginPage} />
 
         <Route exact path="/repos" component={Home}>
           <Provider store={store}>
