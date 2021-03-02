@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useTypedSelector } from '../hooks/useTypedSelector';
-import { useActions } from '../hooks/useActions';
+import { useTypedSelector } from 'hooks/useTypedSelector';
+import { useActions } from 'hooks/useActions';
 
 interface User {
   name: String,

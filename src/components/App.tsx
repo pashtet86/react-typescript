@@ -1,8 +1,8 @@
-import { Provider }     from 'react-redux';
-import { store }        from '../state';
-import RepositoriesList from './RepositoriesList';
-import Home             from './Home';
-import LoginPage             from 'pages/LoginPage';
+import { Provider }       from 'react-redux';
+import { store }          from 'state';
+import RepositoriesList   from './RepositoriesList';
+import Home               from './Home';
+import LoginPage          from 'pages/LoginPage';
 import { AnimatedSwitch } from 'react-router-transition';
 import 'assets/styles/App.scss';
 
@@ -26,9 +26,13 @@ const App = () => {
         className="switch-wrapper"
       >
         <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/login" >
+          <Provider store={store}>
+            <LoginPage></LoginPage>
+          </Provider>
+        </Route>
 
-        <Route exact path="/repos" component={Home}>
+        <Route exact path="/repos">
           <Provider store={store}>
             <div>
               <h1>Search For a Package</h1> 

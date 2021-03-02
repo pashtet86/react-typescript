@@ -1,6 +1,8 @@
 import { useForm, FormProvider } from "react-hook-form";
-import 						 			'./login-styles.scss';
-import FormInput 				from 'components/FormInput'
+import 						 					'./login-styles.scss';
+import FormInput 						from 'components/FormInput';
+import { useTypedSelector } from 'hooks/useTypedSelector';
+import { useActions } 			from 'hooks/useActions';
 
 interface ILoginInputs {
 	email: string,
@@ -8,79 +10,70 @@ interface ILoginInputs {
 };
  
 const LoginPage: React.FC = () => {
+
+	const { login } = useActions(); 
+  const { token, error, loading } = useTypedSelector(
+    (state) => state.login
+  );
 	
-	const onSubmit = () => console.log('submitted');
+	const onSubmit = () => {
+		console.log('onSubmit');
+		
+		login({ email: 'email', password: 'pswd'});
+	};
 
-	const { control, handleSubmit, errors } = useForm<ILoginInputs>({
-    defaultValues: {
-      email: ""
-    },
-    mode: "onChange"
-  });
-
-	const rules = {
-		email: {
-			required: true,
-			pattern: {
-				value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-				message: 'Invalid email address'
-			}
-		},
-		password: {
-			required: true,
+	interface validation {
+		required: Boolean,
+		pattern?: {
+			value: string | RegExp,
+			message: string,
 		}
 	}
 
-	const methods = useForm();
+	const emailRules: validation = {
+		required: true,
+		pattern: {
+			value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+			message: 'Invalid email address'
+		}
+	}
+
+	const defaultRule: validation = {
+		required: true,
+	}
+
+	const rules = {
+		email: emailRules,
+		password: defaultRule
+	}
+
+	const methods = useForm<ILoginInputs>();
 
 	return (<>
 		<h1>Login page</h1>
 		<FormProvider {...methods} >
-			<form onSubmit={handleSubmit(onSubmit)}>
+			<form onSubmit={methods.handleSubmit(onSubmit)}>
 
-			{/* *************** EMAIL field section *************** */}
+			{ token } <br/>
+			 {error} <br/>
+			 {loading } <br/>
 
-			<FormInput
-				control={control}
-				errors={errors}
-				rules={rules.email}
-				name='email'
-				type='email'
-			/>
-
-			<FormInput
-				control={control}
-				errors={errors}
-				rules={rules.password}
-				name='password'
-				type='password'
-			/>
-
-
-				{/* <input
-					name="email"
-					ref={register({ required: true, pattern: patterns.email })}
-					/>
-
-				<div className="error-message">
-					{errors.email && errors.email.type === 'required' && 'Email field is required'}
-				</div>
-
-				<div className="error-message">
-					{errors.email && errors.email.type === 'pattern' && errors.email.message}
-				</div> */}
-
-				{/* ***************  PASSWORD field section *************** */}
-				{/* <input
-					name="password"
-					ref={register({ required: true })}
+				{/* *************** EMAIL field section *************** */}
+				<FormInput
+					rules={rules.email}
+					name='email'
+					type='email'
 				/>
 
-				<div className="error-message">
-					{errors.password && <span>Password field is required</span>}
-				</div> */}
+				{/* *************** PASSWORD field section *************** */}
+				<FormInput
+					rules={rules.password}
+					name='password'
+					type='password'
+				/>
 
 				<input type="submit" />
+
 			</form>
 		</FormProvider>
 	</>);

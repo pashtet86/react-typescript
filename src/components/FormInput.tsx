@@ -1,28 +1,27 @@
-import { useController } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 export interface FormInputProps {
   name: string
   type?: string
 	rules?: Object,
-	errors?: any,
-	control?: any,
 }
 
+
 const FormInput: React.FC<FormInputProps> = (props) => {
+	const { register, errors } = useFormContext();
 
-	const { field } = useController(props);
-
-	const { name, type, errors } = props;
+	const { name, type, rules } = props;
 
 	return (
 		<div className="form-input">
 			<input
 				type={type}
-				{...field}
+				name={name}
+				ref={register(rules)}
 			/>
 
       <div className="error-message">
-				{errors[name] && errors[name].type === 'required' && 'Email field is required'}
+				{errors[name] && errors[name].type === 'required' && 'Field is required'}
 			</div>
 
       <div className="error-message">
