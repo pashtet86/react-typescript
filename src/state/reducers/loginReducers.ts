@@ -13,25 +13,25 @@ const initialState = {
   token: 'token',
 };
 
-const reducer = ( state: LoginState = initialState, action: LoginActions ): LoginState => {
+const reducer = (state: LoginState = initialState, action: LoginActions): LoginState => {
   switch (action.type) {
     case ActionType.LOGIN:
       return {
         loading: true,
         error: null,
-        token: ''
-      }; 
+        token: '',
+      };
     case ActionType.LOGIN_SUCCESS:
       return {
         loading: false,
         error: null,
-        token: action.payload
+        token: action.payload,
       };
     case ActionType.LOGIN_ERROR:
       return {
         loading: false,
         error: action.payload,
-        token: ''
+        token: '',
       };
     default:
       return state;

@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "no-multi-spaces": [2, {"exceptions": {"ImportDeclaration": true}}]
+  },
+
+  "extends": [
+    "airbnb-typescript",
+    "react-app",
+    "react-app/jest"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "overrides": [
+    {
+        "files": ["**/*.tsx"],
+        "rules": {
+            "react/prop-types": "off"
+        }
+    }
+  ]
+}

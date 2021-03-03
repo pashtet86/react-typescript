@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import repositoriesReducer from './repositoriesReducer';
-import loginPageReducers   from './loginReducers';
+import loginPageReducers from './loginReducers';
 
 const reducers = combineReducers({
   repositories: repositoriesReducer,

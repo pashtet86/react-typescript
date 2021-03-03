@@ -1,0 +1,7 @@
+{
+  "experimentalComponentTesting": true,
+  "componentFolder": "src/",
+  "nodeVersion":"system",
+  "video": false,
+  "testFiles": "**/*.spec.*"
+}

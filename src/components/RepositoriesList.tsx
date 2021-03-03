@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useTypedSelector } from 'hooks/useTypedSelector';
 import { useActions } from 'hooks/useActions';
 
@@ -12,14 +12,14 @@ const user: User = {
   name: 'pashtet',
   surname: 'bazhenov',
   age: 34,
-}
+};
 
 const RepositoriesList: React.FC = () => {
   const [term, setTerm] = useState('');
   // const [test, setTest]
   const { searchRepositories } = useActions();
   const { data, error, loading } = useTypedSelector(
-    (state) => state.repositories
+    (state) => state.repositories,
   );
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -32,7 +32,7 @@ const RepositoriesList: React.FC = () => {
     <div>
       <form onSubmit={onSubmit}>
         <input value={term} onChange={(e) => setTerm(e.target.value)} />
-        <button>Search</button>
+        <button type="submit">Search</button>
       </form>
       {user.name}
       {user.surname}
