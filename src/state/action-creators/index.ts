@@ -1,9 +1,8 @@
-import axios from 'axios';
-import { Dispatch } from 'redux';
+import axios          from 'axios';
+import { Dispatch }   from 'redux';
 import { ActionType } from '../action-types/index';
-import { Action } from '../actions';
+import { Action }     from '../actions';
 
-// eslint-disable-next-line import/prefer-default-export
 export const searchRepositories = (term: string) => async (dispatch: Dispatch<Action>) => {
   dispatch({
     type: ActionType.SEARCH_REPOSITORIES,

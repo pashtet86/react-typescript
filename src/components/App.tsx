@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from 'state';
 import RepositoriesList from './RepositoriesList';
 import Home from './Home';
+import PrivateRoute from './PrivateRoute';
 import 'assets/styles/App.scss';
 
 const App = () => (
@@ -21,20 +22,18 @@ const App = () => (
       className="switch-wrapper"
     >
       <Route exact path="/" component={Home} />
-      <Route exact path="/login">
+      <Route exact path="/login/:id?">
         <Provider store={store}>
           <LoginPage />
         </Provider>
       </Route>
 
-      <Route exact path="/repos">
+      <PrivateRoute isAuth={false} redirectPath="/login" path="/repos">
         <Provider store={store}>
-          <div>
-            <h1>Search For a Package</h1>
-            <RepositoriesList />
-          </div>
+          <RepositoriesList />
         </Provider>
-      </Route>
+      </PrivateRoute>
+
     </AnimatedSwitch>
 
   </Router>

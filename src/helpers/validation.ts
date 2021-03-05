@@ -1,4 +1,4 @@
-interface Validation {
+interface IValidation {
   required: Boolean,
   pattern?: {
     value: string | RegExp,
@@ -6,7 +6,7 @@ interface Validation {
   }
 }
 
-const emailRules: Validation = {
+const emailRules: IValidation = {
   required: true,
   pattern: {
     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -14,7 +14,7 @@ const emailRules: Validation = {
   },
 };
 
-const defaultRule: Validation = {
+const defaultRule: IValidation = {
   required: true,
 };
 

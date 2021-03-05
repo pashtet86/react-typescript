@@ -14,7 +14,16 @@ interface LoginErrorAction {
   payload: string;
 }
 
+interface LoginUpdateFieldAction {
+  type: ActionType.LOGIN_UPDATE_FIELD;
+  payload: {
+    name: string,
+    value: string,
+  };
+}
+
 export type LoginActions =
   | LoginAction
   | LoginSuccessAction
-  | LoginErrorAction;
+  | LoginErrorAction
+  | LoginUpdateFieldAction;
