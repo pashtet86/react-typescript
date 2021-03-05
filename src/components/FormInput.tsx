@@ -27,6 +27,8 @@ const FormInput: React.FC<FormInputProps> = (props) => {
         ref={register(rules)}
         data-testing={name}
         onChange={(e) => onChange(e.target.value, name)}
+        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+
       />
 
       {

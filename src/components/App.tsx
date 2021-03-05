@@ -7,7 +7,6 @@ import { store } from 'state';
 import RepositoriesList from './RepositoriesList';
 import Home from './Home';
 import PrivateRoute from './PrivateRoute';
-import 'assets/styles/App.scss';
 
 const App = () => (
   <Router>
