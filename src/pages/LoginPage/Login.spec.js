@@ -4,18 +4,27 @@ import Login          from "./index";
 import { Provider }   from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-const initialState = { login: {
+
+const defaultForm = {
+  email: '',
+  password: '',
+};
+
+const state = {
   loading: false,
   error: null,
   token: 'token',
-}};
+  form: defaultForm,
+};
+
+const initialState = { login: state};
 
 const mockStore = configureStore();
 const store = mockStore(initialState);
 
 describe("Login page", () => {
 
-  
+
   it("renders fileds and control", () => {
     mount(
       <Provider store={store}>
@@ -35,8 +44,7 @@ describe("Login page", () => {
     );
 
     cy.get('input[type="submit"]').click();
-    cy.get('.login-form').find('.error-message').should('have.length', 2);
+    cy.get('.login-page').find('.error-message').should('have.length', 2);
   });
 
 });
- 
